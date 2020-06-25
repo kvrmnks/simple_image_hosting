@@ -51,7 +51,11 @@ def uploadId(id):
     data = test.getPicsById(id)
     name = data[0]['name'].split(".")
     name = name[len(name) - 1]
-    return flask.Response(data[0]['data'], mimetype='image/' + name)
+    res = flask.Response(data[0]['data'], mimetype='image/' + name)
+    res.headers.add('Access-Control-Allow-Origin', '*')
+    res.headers.add('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,DELETE')
+    res.headers.add('Access-Control-Allow-Headers', 'x-requested-with,content-type')
+    return res
 
 
 @app.route('/about', methods=['POST', 'GET'])
