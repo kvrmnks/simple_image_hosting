@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>上传</title>
+</head>
+<body>
+<h2>上传</h2>
+<form action = "" method = "post">
+        <input type="file" name="file" id="fileCont" accept="image/*"/>
+</form>
+</body>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('#fileCont').on('change',function(){
+            console.log($(this)[0].files)
+            let fileObj = $(this)[0].files[0]
+            let formFile = new FormData();
+            formFile.append('file',fileObj)
+            formFile.append('id',233)
+            let data = formFile
+            let request = $.ajax({
+                data: data,
+                type: "POST",
+                dataType: "text",
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done(function(data){
+               //window.location.assign(data);
+            })
+        })
+    </script>
+</body>
+</html>
